@@ -1,64 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error-Prone HTML Page</title>
-    <link rel="stylesheet" href="nonexistent_stylesheet.css"> <!-- Incorrect URL for CSS file -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            text-align: center;
-            padding-top: 50px;
-        }
+      /* Internal CSS for body alignment */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Apply vertical space of 10 pixels */
+      body>* {
+        margin-bottom: 10px;
+      }
     </style>
     <script>
-        // Function to load AJAX content
-        function loadAjaxContent() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'nonexistent_url', true); // Incorrect URL for AJAX request
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        document.getElementById('ajaxResponse').innerHTML = xhr.responseText;
-                    } else {
-                        document.getElementById('ajaxResponse').innerHTML = 'Error loading AJAX content';
-                    }
-                }
-            };
-            xhr.send();
-        }
-
-        // Function to check if a string matches a regex pattern
-        function validateString(str, regex) {
-            return regex.test(str);
-        }
-
+      // Function to load AJAX content
+      function loadAjaxContent() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'nonexistent_url', true); // Incorrect URL for AJAX request
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              document.getElementById('ajaxResponse').innerHTML = xhr.responseText;
+            } else {
+              document.getElementById('ajaxResponse').innerHTML = 'Error loading AJAX content';
+            }
+          }
+        };
+        xhr.send();
+      }
+      // Function to check if a string matches a regex pattern
+      function validateString(str, regex) {
+        return regex.test(str);
+      }
+      // Attach event listener to the button to load AJAX content when clicked
+      document.addEventListener('DOMContentLoaded', function() {
+        // Load valid image
+        document.getElementById('validImage').src = 'https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg?size=338&ext=jpg&ga=GA1.1.735520172.1710633600&semt=sph';
+        // Validate string using regex
+        var regexPattern = /^[a-zA-Z0-9_]*$/; // 
+        // Load invalid image
+        document.getElementById('invalidImage').src = 'https://www.example.com/nonexistent_image.jpg';
         // Attach event listener to the button to load AJAX content when clicked
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load valid image
-            document.getElementById('validImage').src = 'https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg?size=338&ext=jpg&ga=GA1.1.735520172.1710633600&semt=sph';
-            
-            // Validate string using regex
-            var regexPattern = /^[a-zA-Z0-9_]*$/; // Sample regex pattern
-            var testString = 'Hello123'; // Sample test string
-            var isValid = validateString(testString, regexPattern);
-            console.log('String validation using regex:', isValid ? 'Valid' : 'Invalid');
-            
-            // Load invalid image
-            document.getElementById('invalidImage').src = 'https://www.example.com/nonexistent_image.jpg';
-
-            // Attach event listener to the button to load AJAX content when clicked
-            document.getElementById('loadAjaxButton').addEventListener('click', loadAjaxContent);
-        });
+        document.getElementById('loadAjaxButton').addEventListener('click', loadAjaxContent);
+      });
     </script>
-</head>
-<body>
+    
+    
+  </head>
+  <body>
     <h1>Error-Prone HTML Page</h1>
-    <img id="validImage" src="" alt="Valid Image"> <!-- Valid URL for image -->
+    <img id="invalidImage" src="nonexistent_image.jpg" alt="Invalid Image">
+    <img id="validImage" src="" alt="Valid Image">
     <div id="ajaxResponse"></div>
-    <button id="loadAjaxButton">Load AJAX Content</button> <!-- Button to trigger AJAX request -->
-    <img id="invalidImage" src="nonexistent_image.jpg" alt="Invalid Image"> <!-- Incorrect URL for image -->
-</body>
+    <div id="ajaxResponse"></div>
+    <button id="loadAjaxButton">Load Invalid AJAX Content</button>
+    <div id="validAjaxResponse"></div>
+    <script>
+        // AJAX request code
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'nonexistent_url', true); // Incorrect URL for AJAX request
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    document.getElementById('validAjaxResponse').innerHTML = xhr.responseText;
+                } else {
+                    document.getElementById('validAjaxResponse').innerHTML = 'Valid Ajax';
+                }
+            }
+        };
+        xhr.send();
+    </script>
+
+  </body>
 </html>
