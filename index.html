@@ -18,20 +18,26 @@
     <h1>Error-Prone HTML Page</h1>
     <img src="nonexistent_image.jpg" alt="Nonexistent Image"> <!-- Incorrect URL for image -->
     <div id="ajaxResponse"></div>
+    <button id="loadAjaxButton">Load AJAX Content</button> <!-- Button to trigger AJAX request -->
     <script>
-        // AJAX request code
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'nonexistent_url', true); // Incorrect URL for AJAX request
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    document.getElementById('ajaxResponse').innerHTML = xhr.responseText;
-                } else {
-                    document.getElementById('ajaxResponse').innerHTML = 'Error loading AJAX content';
+        // Function to load AJAX content
+        function loadAjaxContent() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'nonexistent_url', true); // Incorrect URL for AJAX request
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        document.getElementById('ajaxResponse').innerHTML = xhr.responseText;
+                    } else {
+                        document.getElementById('ajaxResponse').innerHTML = 'Error loading AJAX content';
+                    }
                 }
-            }
-        };
-        xhr.send();
+            };
+            xhr.send();
+        }
+
+        // Attach event listener to the button to load AJAX content when clicked
+        document.getElementById('loadAjaxButton').addEventListener('click', loadAjaxContent);
     </script>
 </body>
 </html>
