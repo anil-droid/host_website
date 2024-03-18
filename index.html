@@ -3,19 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Background Image Example</title>
+    <title>Error-Prone HTML Page</title>
+    <link rel="stylesheet" href="nonexistent_stylesheet.css"> <!-- Incorrect URL for CSS file -->
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            background-image: url('https://sitechecker.pro/wp-content/uploads/2023/05/URL-meaning.jpg'); /* Replace 'your_image_url_here.jpg' with the URL or path to your image */
-            background-size: cover;
-            background-position: center;
-            height: 100vh; /* This ensures the background image covers the entire viewport height */
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding-top: 50px;
         }
     </style>
 </head>
 <body>
-    <!-- Your content goes here -->
+    <h1>Error-Prone HTML Page</h1>
+    <img src="nonexistent_image.jpg" alt="Nonexistent Image"> <!-- Incorrect URL for image -->
+    <div id="ajaxResponse"></div>
+    <script>
+        // AJAX request code
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'nonexistent_url', true); // Incorrect URL for AJAX request
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    document.getElementById('ajaxResponse').innerHTML = xhr.responseText;
+                } else {
+                    document.getElementById('ajaxResponse').innerHTML = 'Error loading AJAX content';
+                }
+            }
+        };
+        xhr.send();
+    </script>
 </body>
 </html>
