@@ -13,12 +13,6 @@
             padding-top: 50px;
         }
     </style>
-</head>
-<body>
-    <h1>Error-Prone HTML Page</h1>
-    <img src="nonexistent_image.jpg" alt="Nonexistent Image"> <!-- Incorrect URL for image -->
-    <div id="ajaxResponse"></div>
-    <button id="loadAjaxButton">Load AJAX Content</button> <!-- Button to trigger AJAX request -->
     <script>
         // Function to load AJAX content
         function loadAjaxContent() {
@@ -36,8 +30,35 @@
             xhr.send();
         }
 
+        // Function to check if a string matches a regex pattern
+        function validateString(str, regex) {
+            return regex.test(str);
+        }
+
         // Attach event listener to the button to load AJAX content when clicked
-        document.getElementById('loadAjaxButton').addEventListener('click', loadAjaxContent);
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load valid image
+            document.getElementById('validImage').src = 'https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg?size=338&ext=jpg&ga=GA1.1.735520172.1710633600&semt=sph';
+            
+            // Validate string using regex
+            var regexPattern = /^[a-zA-Z0-9_]*$/; // Sample regex pattern
+            var testString = 'Hello123'; // Sample test string
+            var isValid = validateString(testString, regexPattern);
+            console.log('String validation using regex:', isValid ? 'Valid' : 'Invalid');
+            
+            // Load invalid image
+            document.getElementById('invalidImage').src = 'https://www.example.com/nonexistent_image.jpg';
+
+            // Attach event listener to the button to load AJAX content when clicked
+            document.getElementById('loadAjaxButton').addEventListener('click', loadAjaxContent);
+        });
     </script>
+</head>
+<body>
+    <h1>Error-Prone HTML Page</h1>
+    <img id="validImage" src="" alt="Valid Image"> <!-- Valid URL for image -->
+    <div id="ajaxResponse"></div>
+    <button id="loadAjaxButton">Load AJAX Content</button> <!-- Button to trigger AJAX request -->
+    <img id="invalidImage" src="nonexistent_image.jpg" alt="Invalid Image"> <!-- Incorrect URL for image -->
 </body>
 </html>
